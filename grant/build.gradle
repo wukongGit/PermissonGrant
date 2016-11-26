@@ -14,7 +14,7 @@ ext {
     siteUrl = 'https://github.com/wukongGit/PermissonGrant'
     gitUrl = 'https://github.com/wukongGit/PermissonGrant.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'wukong'
     developerName = 'wukong'
@@ -27,7 +27,7 @@ ext {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         minSdkVersion 15
@@ -36,8 +36,15 @@ android {
         versionName "1.0"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+        }
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -121,6 +128,16 @@ artifacts {
     archives sourcesJar
 }
 
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version libraryVersion
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}
+
 // Bintray
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -149,4 +166,3 @@ bintray {
         }
     }
 }
-
